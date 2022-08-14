@@ -1,48 +1,32 @@
 # include <bits/stdc++.h>
 
 using namespace std;
+using ull = unsigned long long;
 
 int main()
 {
   int m, n;
 
   cin >> n >> m;
-  int dorms[n]{0};
-  
-  for (int i{0}; i < n; ++i) {
-    cin >> dorms[i];
-    if (i > 0) dorms[i] += dorms[i - 1];
-  }
-    
-  for (int i{0}; i < m;++i)
+
+  vector<ull> v;
+
+  for (int i{0}; i < n; ++i)
   {
-    int rec;
-    cin >> rec;
-
-    if (rec == 1)
-    {
-      cout << "1 1\n";
-      continue;
-    }
-
-    int low{0}, high{n-1};
-
-    while (low <= high) {
-      int mid = (low + high) /2;
-    
-      if (rec > dorms[mid-1] && rec <= dorms[mid])
-      {
-        cout << mid + 1 << " " << rec - dorms[mid - 1] << "\n";
-        break;
-      }
-
-      if (rec < dorms[mid-1])
-        high = mid - 1;
-      else
-        low = mid + 1;
-    }
-
+    ull data;
+    cin >> data;
+    v.push_back( i == 0 ? data : data + v[i - 1]);
   }
+
+  for (int i{0}; i < m; ++i)
+  {
+    ull b;
+    cin >> b;
+    auto lower = lower_bound(v.begin(), v.end(), b);
+    auto pos = lower - v.begin();
+    cout << ( pos + 1) << " " << (pos == 0 ? b : b - v[pos - 1]) << "\n"; 
+  }
+
   
   return 0;
 }
