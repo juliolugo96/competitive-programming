@@ -5,28 +5,41 @@ using ull = unsigned long long;
 
 int main()
 {
+  ios::sync_with_stdio(false);
+  cin.tie(nullptr);
+  
   int m, n;
 
   cin >> n >> m;
 
-  vector<ull> v;
+  ull v[n];
 
   for (int i{0}; i < n; ++i)
   {
-    ull data;
-    cin >> data;
-    v.push_back( i == 0 ? data : data + v[i - 1]);
+    cin >> v[i];
+    
+    v[i] += i == 0 ? 0 : v[i - 1];
   }
 
   for (int i{0}; i < m; ++i)
   {
     ull b;
     cin >> b;
-    auto lower = lower_bound(v.begin(), v.end(), b);
-    auto pos = lower - v.begin();
-    cout << ( pos + 1) << " " << (pos == 0 ? b : b - v[pos - 1]) << "\n"; 
+
+    int low{0}, high{n-1};
+
+    while(low < high)
+    {
+      int mid = low + (high - low)/2;
+
+      if (b <= v[mid])
+        high = mid;
+      else 
+        low = mid + 1;
+    }
+
+    cout << ( low + 1) << " " << (low == 0 ? b : b - v[low - 1]) << "\n"; 
   }
 
-  
   return 0;
 }
