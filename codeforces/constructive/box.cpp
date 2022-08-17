@@ -10,69 +10,52 @@ int main()
   short t;
 
   cin >> t;
-
-  while (t--)
+  while(t--)
   {
     int n;
     cin >> n;
 
-    int q[n], p[n], pos{0};
-    bool res[n]{false}, flag = false, special_case = false;
+    bool is_impossible = false, map[n]={false};
+    int min{1}, p[n]{0};
 
+    int q[n]{0};
+    
     for (int i{0}; i < n; ++i)
     {
       cin >> q[i];
-      res[q[i] - 1] = true;
+      if (is_impossible) continue;
 
-      if (i > 0 and p[i - 1] == p[i])
+      if (q[i] < i + 1)
       {
-        if (p[i] == 1) special_case = true;
+        is_impossible = true;
+        continue;
+      }
         
-        flag = true;
-        pos = i;
-      }
-
-      if (not flag)
-        p[i] = q[i];
-    }
-
-
-    if (special_case)
-    {
-      cout << "-1\n";
-      continue;
-    }
+      if (map[q[i] - 1])
+      {
+        map[min - 1] = true;
+        p[i] = min;
+        while(map[min - 1]) min++;
+      } else
+      {
+         map[q[i]-1] = true;
+         p[i] = q[i];
       
-    int j{1};
-    while(j <= n)
-    {
-      if (not res[j-1])
-      {
-        p[pos] = j;
-        res[j - 1] = true;
-        pos++;
-      }
-
-      j++;
-    }
-    flag = false;
-    for (int i{0}; i < n; ++i)
-    {
-      if (not res[i])
-      {
-        flag= true;
-        break;
+        if (q[i] <= min)
+          while(map[min - 1]) min++;
       }
     }
 
-    if (not flag)
-    {
-      for (int i{0}; i < n; i++)
-        cout << p[i] << " ";
+    if (is_impossible)
+      {
+        cout << -1 << "\n";
+        continue;
+      }
 
-      cout << "\n";
-    } else
-        cout << "-1\n";
+    for (int i{0}; i < n; i++)
+      cout << p[i] << " ";
+
+    cout << "\n";
   }
 
   return 0;
