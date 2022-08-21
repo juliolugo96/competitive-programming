@@ -4,43 +4,56 @@ using namespace std;
  
 # define io_boost ios::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);
  
-map<pair<int, int>, int> map_a;
+static pair<int, int> map_a[static_cast<int>(1e5)+1]{{0,0}};
  
 int main()
 {
   io_boost
   int n;
   cin >> n;
-  int a[n]{0};
+  int a[n]{0}, sol[n]{0};
  
-  int start{1}, acc{0};
+  int col{0};
  
   for (int i{0}; i < n; ++i)
   {
     cin >> a[i];
-    
-    map_a[{start, a[i]}]++;
- 
-    if (map_a[{start, a[i]}] == n - a[i])
-      start++;
+
+    if (map_a[a[i]] != make_pair(0, 0))
+    { 
+      map_a[a[i]].first++;
+
+      sol[i] = map_a[a[i]].second;
+    }
+    else
+    {
+      map_a[a[i]] = { 1, col};
+      sol[i] = col;
+      col++;
+    }
+
+    if (n - map_a[a[i]].first == a[i])
+      {
+        map_a[a[i]].first = 0;
+        map_a[a[i]].second = 0;
+      }
+
   }
- 
-  string s;
- 
-  for (auto &p: map_a)
+
+  for (int i{0}; i < n; i++)
   {
-    if (n - p.first.second != p.second)
+    if (map_a[a[i]].first != 0)
     {
       cout << "Impossible\n";
       return 0;
     }
- 
-    for (int i{0}; i < p.second; i++)
-      s += to_string(p.first.first) + ' ';
   }
- 
+
   cout << "Possible\n";
-  cout << s << "\n";
+
+  for (int i{0}; i < n; i++)
+      cout << sol[i] + 1 << " ";
  
+  cout << "\n";
   return 0;
 }
