@@ -2,12 +2,12 @@
 
 using namespace std;
 
+using ull = long long;
 # define io_boost ios::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);
-
-using ull = unsigned long long;
 
 int main()
 {
+  io_boost
   short q;
 
   cin >> q;
@@ -16,7 +16,22 @@ int main()
   {
     ull n;
     cin >> n;
-    
+
+    ull result{1}, pow_curr{3};
+
+    while(result  < n)
+    {
+      result  += pow_curr;
+      pow_curr *= 3;
+    }
+
+    while(pow_curr)
+    {
+      if (result - pow_curr >= n) result  -= pow_curr;
+      pow_curr/=3;
+    }
+
+    cout << result << "\n";
   }
 
   return 0;
