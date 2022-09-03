@@ -4,6 +4,13 @@ using namespace std;
 
 # define io_boost ios::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);
 
+static bool squares[static_cast<int>(2e6)+1]{false};
+
+bool check_perfect_square(int n)
+{
+    return ceil((double)sqrt(n)) == floor((double)sqrt(n));
+}
+
 
 int main()
 {
@@ -12,20 +19,30 @@ int main()
   vector<int> v;
 
   for (int i{0}; i < 100; ++i)
-    v.push_back((i) * (i));
+    {
+
+    }
 
   while(t--)
   {
     int n;
     cin >> n;
 
-    for (int i{0}; i < n; ++i)
+    if (n == 0)
     {
-      auto a = lower_bound(v.begin(), v.end(), i);
-      cout << (v[*a] - i) << " ";
+      cout << 0 << "\n";
+      continue;
     }
-    
-    cout << "\n";
+
+    if (check_perfect_square(n))
+    {
+      cout << 0 << " ";
+      for (int i{n-1}; i > 0; i--)
+        cout << i << " ";
+
+      cout << "\n";
+    }
+
 
   }
 
