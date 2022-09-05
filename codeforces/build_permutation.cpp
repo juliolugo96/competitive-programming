@@ -11,17 +11,13 @@ bool check_perfect_square(int n)
     return ceil((double)sqrt(n)) == floor((double)sqrt(n));
 }
 
-
 int main()
 {
   short t;
   cin >> t;
-  vector<int> v;
 
-  for (int i{0}; i < 100; ++i)
-    {
-
-    }
+  for (int i{0}; i < static_cast<int>(2e6)+1; ++i)
+    squares[i] = i * i;
 
   while(t--)
   {
@@ -41,7 +37,11 @@ int main()
         cout << i << " ";
 
       cout << "\n";
+      continue;
     }
+
+
+    
 
 
   }
