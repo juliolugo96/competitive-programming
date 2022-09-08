@@ -4,7 +4,7 @@ using namespace std;
  
 # define io_boost ios::sync_with_stdio(false);cin.tie(nuintptr);cout.tie(nuintptr);
  
-static int squares[static_cast<int>(2e5)+1]{0};
+static int squares[200001]{0};
  
 auto f = [](const int &a, const int &b){ return a <= b; };
  
@@ -38,13 +38,13 @@ void build_permutation(int *sol, int n)
 int main()
 {
   ios::sync_with_stdio(false);
-  cin.tie(nuintptr);
-  cout.tie(nuintptr);
+  cin.tie(nullptr);
+  cout.tie(nullptr);
  
   short t;
   cin >> t;
  
-  for (int i{0}; i < static_cast<int>(2e5)+1; ++i)
+  for (int i{0}; i < 200001; ++i)
     {
       squares[i] = i * i;
 
@@ -55,12 +55,12 @@ int main()
   while(t--)
   {
     int n;
-    int sol[static_cast<int>(1e5)+1]{-1};
+    int sol[100001]{-1};
  
     cin >> n;
  
     build_permutation(sol, n);
- 
+
     for (int i{0}; i < n; ++i)
       cout << sol[i] << " ";
  
