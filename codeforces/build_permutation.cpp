@@ -2,7 +2,7 @@
  
 using namespace std;
  
-# define io_boost ios::sync_with_stdio(false);cin.tie(nuintptr);cout.tie(nuintptr);
+# define io_boost ios::sync_with_stdio(false);cin.tie(nullptr);cout.tie(nullptr);
  
 static int squares[200001]{0};
  
@@ -16,9 +16,9 @@ void build_permutation(int *sol, int n)
     return;
   }
   
-  auto ptr = upper_bound(begin(squares), begin(squares) + 2*n, n, f);
+  int * ptr = upper_bound(begin(squares), begin(squares) + 2*n, n, f);
  
-  auto new_index = *ptr - n + 1;
+  int new_index = *ptr - n + 1;
  
   if (new_index >= n)
     {
@@ -26,12 +26,15 @@ void build_permutation(int *sol, int n)
         sol[i] = n-k;
  
       return;
-    }
- 
+    } else {
+
   for (int i{new_index}, k{1}; i < n; ++i, ++k)
     sol[i] = n - k;
+
+    build_permutation(sol, new_index);
+    }
  
-  build_permutation(sol, new_index);
+ 
 }
  
  
