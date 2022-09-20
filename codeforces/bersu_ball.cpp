@@ -2,17 +2,21 @@
 
 using namespace std;
 
-static int a[100]{-1}, b[100]{-1};
+static int a[100]{0}, b[100]{0};
 static int edmons[100][100]{0};
 int n, m;
 
 bool bpm(int boy, bool *seen, int *available_girls)
 {
+  // cout << "new boy: " << boy << "\n";
+  
   for (int i{0}; i < m; ++i)
   {
     if (edmons[boy][i] and !seen[i])
     {
       seen[i] = true;
+
+      // cout << "Available girls ["<< i << "]: " << available_girls[i] << "\n";
 
       if (available_girls[i] < 0 or bpm(available_girls[i], seen, available_girls))
       {
@@ -36,8 +40,11 @@ int max_bpm()
   //   cout << "\n"; 
   // }
   
-  int available_girls[m]{-1};
+  int available_girls[m]{};
 
+  for (int i{0}; i < m; ++i)
+    available_girls[i] = -1;
+  
   int counter{0};
 
   for (int i{0}; i < n; ++i)
