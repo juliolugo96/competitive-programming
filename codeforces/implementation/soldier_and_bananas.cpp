@@ -11,7 +11,8 @@ int main()
   for (long i={1}; i <=w; ++i )
     sum += i*k;
 
-  cout << sum - n << "\n";
+  long res = sum - n;
+  cout << (res >= 0 ? res : 0)  << "\n";
 
   return 0;
 }
