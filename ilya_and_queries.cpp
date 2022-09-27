@@ -2,6 +2,8 @@
 
 using namespace std;
 
+static int a[1000000]{0};
+
 int main()
 {
   ios_base::sync_with_stdio(false);
@@ -12,43 +14,25 @@ int main()
 
   cin >> s;
 
+  size_t n = s.size();
+  int k{0};
+  for (int i{1}; i < n; i++)
+  {  
+    if (s[i] == s[i - 1])
+      k++;
+    
+    a[i] = k;
+  }
+
   int m;
   cin >> m;
-  map<pair<int, int>, int> mem;
 
   while(m--)
   {
     int l, r;
     cin >> l >> r;
 
-
-    if (mem[{l, r}])
-    {
-      cout << mem[{l, r}] << "\n";
-      continue;
-    }
-
-    int counter{0};
-    for (int i{l-1}; i < (r - 1); i++)
-    {
-      
-      if (s[i] == s[i + 1])
-        counter++;
-
-      if (mem[{i + 2, r}])
-      {
-        counter += mem[{i + 2, r}];
-
-        mem[{l, i + 2}] = counter;
-        break;
-      }
-
-      // cout << "(" << l << ", " << i + 2 << ")" << "\n";
-
-      mem[{l, i + 2}] = counter;
-    }
-
-    cout << counter << "\n";
+    cout << a[r-1] - a[l - 1] << "\n";
   }
 
   return 0;
