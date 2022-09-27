@@ -31,10 +31,19 @@ int main()
     int counter{0};
     for (int i{l-1}; i < (r - 1); i++)
     {
+      
       if (s[i] == s[i + 1])
         counter++;
 
-//       cout << "(" << l << ", " << i + 2 << ")" << "\n";
+      if (mem[{i + 2, r}])
+      {
+        counter += mem[{i + 2, r}];
+
+        mem[{l, i + 2}] = counter;
+        break;
+      }
+
+      // cout << "(" << l << ", " << i + 2 << ")" << "\n";
 
       mem[{l, i + 2}] = counter;
     }
