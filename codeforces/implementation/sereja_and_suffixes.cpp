@@ -14,25 +14,25 @@ int main()
   int n, m;
 
   cin >> n >> m;
-  int counter{0};
   for (int i{0}; i < n; ++i)
   {
     cin >> a[i];
     if (!nums[a[i]])
     {
       nums[a[i]] = true;
-      counter++;
     }
   }
 
-  for (int i{0}; i < n; ++i)
+  int count{0};
+  for (int i{n - 1}; i >= 0; i--)
   {
     if (nums[a[i]])
     {
-      results[i] = counter;
-      counter--;
       nums[a[i]] = false;
-    } e
+      count++;
+    }
+
+    results[i] = count;
   }
 
   while(m--)
