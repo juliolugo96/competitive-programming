@@ -2,14 +2,11 @@
 
 using namespace std;
 
-using ull = long long;
-
 int main()
 {
   ios_base::sync_with_stdio(false);
   cin.tie(nullptr);
   cout.tie(nullptr);
-
 
   int t;
   cin >> t;
@@ -19,22 +16,21 @@ int main()
     int n;
     cin >> n;
 
-    ull a[200001]{0};
+    int a[200001]{0};
 
     for (int i{0}; i < n; i++)
         cin >> a[i];
 
-    map<int, int> mem;
+    int mem[200001]{0};
     
-    int min_val{-1};
+    int min_val{0};
 
-    for (int i{1}; i <= n; i++)
+    for (int i{n}; i > 0; i--)
     {
-      ull res{0};
-      ull next_i{i};
-
-      
-      while(next_i < n)
+      int res{0};
+      int next_i{i};
+      // cout << "i value: " << i << "\n";
+      while(next_i <= n)
       {
         if (mem[next_i])
         {
@@ -42,9 +38,13 @@ int main()
           break;
         }
 
-        next_i += a[next_i];
-        res += a[next_i];
+        res += a[next_i - 1];
+        next_i += a[next_i - 1];
+
+        // cout << "Res: " << res << "\n";
+        // cout << next_i << "\n\n";
       }
+      mem[i] = res;
 
       min_val = res > min_val ? res : min_val;
     }
