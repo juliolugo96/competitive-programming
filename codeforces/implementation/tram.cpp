@@ -8,7 +8,7 @@ int main()
 
   cin >> n;
 
-  int max{0};
+  int max{0}, curr{0};
 
   while (n--)
   {
@@ -16,12 +16,13 @@ int main()
 
     cin >> a >> b;
 
-    if (b > max)
-      max= b;
+    curr += b - a;
+    if (curr > max)
+      max = curr;
   }
 
 
-  cout << max + 1 << "\n";
+  cout << max << "\n";
 
 
   return 0;
