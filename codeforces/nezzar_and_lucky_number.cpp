@@ -4,6 +4,10 @@ using namespace std;
 
 int main()
 {
+  ios_base::sync_with_stdio(false);
+  cin.tie(nullptr);
+  cout.tie(nullptr);
+
   short t;
   cin >>t;
 
@@ -22,18 +26,42 @@ int main()
 
       cin >> a;
       bool flag{false};
-      while(a > 0)
-      {
-        int mod = a % 10;
-        a /= 10;
-        if (mod == d)
-          {
-            cout << "YES ";
-            flag = true;
-            break;
-          }
+
+      if (a % d == 0 or a >= 10*d) {
+        cout << "YES\n";
+        continue;
       }
 
+      bool is_lucky{false};
+
+      // cout << "a: " << a << "\n";
+
+      for (int j{0}; j <= a; j += d)
+      {
+        int aux = a - j;
+
+        // cout << "Checking if aux is lucky number: " << aux << "\n";
+        while (aux > 0)
+        {
+          int mod = aux % 10;
+          aux /= 10;
+
+          if (mod == d)
+          {
+            is_lucky = true;
+            break;
+          }
+        }
+
+        if (is_lucky)
+        {
+          cout << "YES\n";
+          break;
+        }
+      }
+
+      if (not is_lucky) cout << "NO\n";
+      
     }
 
 
