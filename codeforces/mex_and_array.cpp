@@ -38,19 +38,14 @@ int main()
 
     uint pow_set_size = fast_pow(2, n);
     int sum{0};
-    for (int i{0}; i < pow_set_size; i++)
-    {
-      int subset[n]{0}, k{0};
-      for (int j{0}; j< n; j++)
-      {
-        if (i & (1 << j))
-          {
-            subset[k] = a[j];
-            k++;
-          }
-      }
 
-      sum += max_partition(subset)
+    for (int i={0}; i < n; i++)
+    {
+      int subset[n], k{0};
+      for (int j{0}, k{0}; j < (n - i) ; j++, k++)
+      {
+        subset[k] = 
+      }
     }
 
 
