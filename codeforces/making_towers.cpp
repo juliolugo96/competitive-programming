@@ -16,17 +16,20 @@ int main()
     int n;
 
     cin >> n; 
-    int c[n]{0}, colors[n]{-1}, ans[n]{0};
+    int c[n]{0}, colors[n], ans[n]{0};
+
+    memset(colors, -1, sizeof(ans));
 
     for (int i{0}; i < n; ++i)
       cin >> c[i];
 
     for (int i{0}; i < n; ++i)
-    {
+    { 
       if (colors[ c[i] -1 ] == -1)
       {
         colors[ c[i] -1 ] = i % 2;
         ans[c[i] -1 ]++;
+        continue;
       }
 
       if (colors[ c[i] - 1] != (i % 2))
@@ -34,7 +37,6 @@ int main()
         ans[c[i] -1 ]++;
         colors[ c[i] -1 ] = i % 2;
       }
-
     }
 
     for (int i{0}; i < n; i++)
