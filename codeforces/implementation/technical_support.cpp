@@ -16,8 +16,12 @@ int main()
     string s;
     cin >> s;
 
+    int bal{0};
 
-    cout << (s.back() == 'Q' ? "No\n" : "Yes\n");
+    for (int i{0}; i < n; i++)
+      bal += s[i] == 'Q' ? 1 : bal > 0 ? -1 : 0;
+    
+    cout << (bal <= 0 ? "Yes\n" : "No\n");
   }
 
   return 0;
