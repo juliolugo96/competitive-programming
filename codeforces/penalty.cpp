@@ -4,6 +4,10 @@ using namespace std;
 
 int main()
 {
+  ios_base::sync_with_stdio(false);
+  cin.tie(nullptr);
+  cout.tie(nullptr);
+  
   short t;
 
   cin >> t;
@@ -16,32 +20,27 @@ int main()
 
     size_t n = s.size();
 
-    int res{0}, sol{0};
+    int pos{0}, pos_q{0}, neg{0}, neg_q{0}, sol{0};
 
     for (int i = 0; i < n; i++)
     {
-      if (s[i] == '?')
-        (i & 1) ? res-- : res++;
-      else if (i & 1)
-        s[i] == '1' ? res-- : res;
-      else
-        s[i] == '1' ? res++ : res;
+      if (not(i & 1) and s[i] == '1')
+        pos++;
+      else if (not(i & 1) and s[i] == '?')
+        pos_q++;
+      else if (i & 1 and s[i] == '1')
+        neg++;
+      else if (i & 1 and s[i] == '?')
+        neg_q++;
 
-      int remainder = ((n - (i + 1)) & 1) ? n - i : n - (i + 1);
-
-      // cout << "Current kick: " << i + 1 << "\n";
-      // cout << "Current result: " << res << "\n";
-      // cout << "Remainder kicks: " << remainder / 2 << "\n\n\n";
-
-      if (remainder / 2 < abs(res) ||
-          (not(i & 1) and s[i] == '0' and remainder / 2 <= abs(res)))
+      if ((pos_q + pos > (n - i) / 2 + neg) or
+          (neg_q + neg > (n - (i + 1)) / 2 + pos) or
+          (i == n - 1))
       {
-        sol = i + 1;
+        cout << i + 1 << "\n";
         break;
       }
     }
-
-    cout << (sol == 0 ? 10 : sol) << "\n";
   }
 
   return 0;
