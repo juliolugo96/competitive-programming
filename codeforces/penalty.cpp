@@ -21,29 +21,27 @@ int main()
     for (int i = 0; i < n; i++)
     {
       if (s[i] == '?')
-        if (i & 1)
-          res >= 0 ? res : res--;
-        else
-          res >= 0 ? res++ : res;
+        (i & 1) ? res-- : res++;
       else if (i & 1)
         s[i] == '1' ? res-- : res;
       else
         s[i] == '1' ? res++ : res;
 
-      int remainder = n - (i + 1) & 1 ? n - i : n - (i + 1);
+      int remainder = ((n - (i + 1)) & 1) ? n - i : n - (i + 1);
 
       // cout << "Current kick: " << i + 1 << "\n";
       // cout << "Current result: " << res << "\n";
       // cout << "Remainder kicks: " << remainder / 2 << "\n\n\n";
 
-      if (remainder / 2 <= abs(res))
+      if (remainder / 2 < abs(res) ||
+          (not(i & 1) and s[i] == '0' and remainder / 2 <= abs(res)))
       {
         sol = i + 1;
         break;
       }
     }
 
-    cout << (sol == 0 ? 10 : sol + 1) << "\n";
+    cout << (sol == 0 ? 10 : sol) << "\n";
   }
 
   return 0;
