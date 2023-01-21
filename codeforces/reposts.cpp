@@ -7,6 +7,9 @@ map<string, int> graph;
 int main()
 {
   short n;
+  ios_base::sync_with_stdio(false);
+  cin.tie(nullptr);
+  cout.tie(nullptr);
 
   cin >> n;
 
