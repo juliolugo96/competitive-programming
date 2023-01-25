@@ -4,13 +4,13 @@ using namespace std;
 
 int main()
 {
-  short t;
+  int t;
 
   cin >> t;
 
   while (t--)
   {
-    short n, a, b, c;
+    int n, a, b, c;
     cin >> n;
 
     cin >> a >> b >> c;
@@ -19,22 +19,38 @@ int main()
 
     cin >> s;
 
-    auto rock_count = count(s.begin(), s.end(), 'R');
-    auto paper_count = count(s.begin(), s.end(), 'P');
-    auto scissor_count = count(s.begin(), s.end(), 'S');
+    int rock_count = static_cast<int>(count(s.begin(), s.end(), 'R'));
+    int paper_count = static_cast<int>(count(s.begin(), s.end(), 'P'));
+    int scissor_count = static_cast<int>(count(s.begin(), s.end(), 'S'));
 
-    short win{0};
+    int rock_wins = min(rock_count, b);
+    int paper_wins = min(paper_count, c);
+    int scissors_wins = min(scissor_count, a);
 
-    win += b >= rock_count ? rock_count : b;
-    win += c >= paper_count ? paper_count : c;
-    win += a >= scissor_count ? scissor_count : a;
+    int alice_win = 2 * (rock_wins + paper_wins + scissors_wins) >= n;
 
-    auto res = ((win >= (int)ceil((float)n / 2));
-    cout << res ? "YES\n" : "NO\n");
+    cout << (alice_win ? "YES\n" : "NO\n");
 
-    if (res)
-      for (auto c: s)
-        
+    if (alice_win)
+    {
+      map<char, pair<int, char>> mem = {{'R', {rock_wins, 'P'}}, {'P', {paper_wins, 'S'}}, {'S', {scissors_wins, 'R'}}};
+
+      a -= mem['S'].first;
+      b -= mem['R'].first;
+      c -= mem['P'].first;
+
+      for (auto &c : s)
+        if (mem[c].first-- > 0)
+          cout << mem[c].second;
+        else if (a-- > 0)
+          cout << 'R';
+        else if (b-- > 0)
+          cout << 'P';
+        else
+          cout << 'S';
+
+      cout << "\n";
+    }
   }
   return 0;
 }
