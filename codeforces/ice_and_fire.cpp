@@ -18,25 +18,20 @@ int main()
 
     cin >> s;
 
-    cout << 1 << " ";
+    int wins[n - 1]{0};
 
-    for (int i{2}; i < n; i++)
+    for (int i{2}; i <= n; i++)
     {
-      int winners[i]{0}, count{0}, latest_winner{-1};
-      auto size = s.size();
-
-      for (int j{0}, k{1}; j < size and k < i; j++, k++)
-      {
-        if (s[j] == '0')
-          latest_winner = latest_winner == -1 ? min(k, k + 1) : min(latest_winner, k + 1);
+      int count{0};
+      if (i > 2)
+        if (s[i - 2] != s[i - 3])
+          count = i - 1;
         else
-          latest_winner = latest_winner == -1 ? max(i, k + 1) : max(latest_winner, k + 1);
+          count = wins[i - 2] ? wins[i - 2] : 1;
+      else
+        count = 1;
 
-        winners[latest_winner]++;
-
-        if (winners[latest_winner] == 1)
-          count++;
-      }
+      wins[i - 2] = count;
 
       cout << count << " ";
     }
