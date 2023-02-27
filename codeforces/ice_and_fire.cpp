@@ -27,7 +27,7 @@ int main()
         if (s[i - 2] != s[i - 3])
           count = i - 1;
         else
-          count = wins[i - 2] ? wins[i - 2] : 1;
+          count = wins[i - 3] ? wins[i - 3] : 1;
       else
         count = 1;
 
