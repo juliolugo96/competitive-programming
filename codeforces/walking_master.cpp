@@ -14,7 +14,7 @@ int main()
 
     cin >> a >> b >> c >> d;
 
-    if (d < b or (c > a and (b + abs(c - a)) < d))
+    if (d < b or ((d - b) + a) < c)
     {
       cout << -1 << "\n";
       continue;
@@ -22,11 +22,17 @@ int main()
 
     if (a == c and b == d)
     {
-      cout << "0\n";
+      cout << 0 << "\n";
       continue;
     }
 
-    cout << ((abs(a - b)) + (b == d ? 0 : abs(d - b))) << "\n";
+    if (b == d)
+    {
+      cout << abs(a - c) << "\n";
+      continue;
+    }
+
+    cout << abs(a - (c - (d - b))) + (d - b) << "\n";
   }
 
   return 0;
