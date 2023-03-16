@@ -2,7 +2,7 @@
 
 using namespace std;
 
-static int a[100001]{0};
+static int a[100001]{0}, b[100001]{0};
 
 int main()
 {
@@ -15,31 +15,31 @@ int main()
     int n;
     cin >> n;
 
+    int count_zero{0};
+
     for (int i{0}; i < n; ++i)
+    {
       cin >> a[i];
 
-    sort(begin(a), begin(a) + n);
-
-    int mex{0};
-
-    for (int i{1}; i < n; ++i)
-      cout << mex << " ";
-
-    cout << "\n";
-
-    for (int i{1}; i < n; ++i)
-    {
-      if (a[i] == mex)
-      {
-        mex++;
-        continue;
-      }
-
-      if (a[i] > mex)
-        break;
+      if (a[i] == 0)
+        count_zero++;
     }
 
-    cout << mex << "\n";
+    if (count_zero == n)
+    {
+      cout << 1 << "\n";
+      continue;
+    }
+    else if (count_zero == 0 or n & 1 and not(count_zero & 1))
+    {
+      cout << 0 << "\n";
+      continue;
+    }
+    else
+    {
+      cout << 1 << "\n";
+      continue;
+    }
   }
 
   return 0;
