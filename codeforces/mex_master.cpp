@@ -2,7 +2,7 @@
 
 using namespace std;
 
-static int a[100001]{0}, b[100001]{0};
+static int a[200001]{0};
 
 int main()
 {
@@ -15,7 +15,7 @@ int main()
     int n;
     cin >> n;
 
-    int count_zero{0};
+    int count_zero{0}, count_one{0};
 
     for (int i{0}; i < n; ++i)
     {
@@ -23,23 +23,22 @@ int main()
 
       if (a[i] == 0)
         count_zero++;
+      else if (a[i] == 1)
+        count_one++;
     }
 
-    if (count_zero == n)
-    {
-      cout << 1 << "\n";
-      continue;
-    }
-    else if (count_zero == 0 or n & 1 and not(count_zero & 1))
+    if (count_zero <= (n + 1) / 2)
     {
       cout << 0 << "\n";
       continue;
     }
-    else
+
+    if (count_one == 0 or count_one + count_zero < n)
     {
       cout << 1 << "\n";
       continue;
     }
+    cout << 2 << "\n";
   }
 
   return 0;
