@@ -19,8 +19,11 @@ int main()
     {
       cin >> a[i];
 
-      if (a[i] >= i + 1 and a[i] < n)
+      if (a[i] == i + 1 or i + 1 > a[i])
+      {
         flag = true;
+      }
+
     }
 
     cout << (flag ? "YES\n" : "NO\n");
