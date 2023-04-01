@@ -14,24 +14,22 @@ int main()
 
     cin >> s;
     auto n = s.size();
-    int res{0};
+    int count{0}, temp_a{0}, temp_b{0};
 
-    if (n == 1)
-      res++;
+    if (s[0] == '_')
+      count++;
 
-    if (s[0] == '_' or s[n - 1] == '_')
-      res++;
+    if (s[n - 1] == '_')
+      count++;
 
-    if (n > 3 and s[n - 1] == '^' and s[n - 2] == '^' and s[n - 3] == '^')
-      res++;
+    if (n == 1 and s[0] == '^')
+      count++;
 
     for (int i{1}; i < n; ++i)
-    {
       if (s[i] == '_' and s[i - 1] != '^')
-        res++;
-    }
+        count++;
 
-    cout << res << "\n";
+    cout << count << "\n";
   }
 
   return 0;
