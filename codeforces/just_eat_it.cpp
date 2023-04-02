@@ -16,32 +16,24 @@ int main()
 
     cin >> n;
 
-    long long yasser{0};
     bool flag = false;
     for (int i{0}; i < n; i++)
-    {
       cin >> a[i];
-      yasser += a[i];
 
-      if (a[i] < 0)
-        flag = true;
-
-      if (i > 0)
-        a[i] += a[i - 1];
-    }
-
-    if (flag)
+    long long l{0}, r{0};
+    for (int i{0}, j{n - 1}; i < n; i++, j--)
     {
-      cout << "YES\n";
-      continue;
-    }
+      l += a[i];
+      r += a[j];
 
-    for (int i{0}; i < n; ++i)
-      if (a[i] > yasser and i != n - 1)
+      if (l <= 0 or r <= 0)
       {
-        cout << "NO\n";
+        flag = true;
         break;
       }
+    }
+
+    cout << (flag ? "NO\n" : "YES\n");
   }
 
   return 0;
