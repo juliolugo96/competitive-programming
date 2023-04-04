@@ -22,6 +22,9 @@ int main()
     if (s[0] == '_' or s[n - 1] == '_')
       res++;
 
+    if (n > 3 and s[n - 1] == '^' and s[n - 2] == '^' and s[n - 3] == '^')
+      res++;
+
     for (int i{1}; i < n; ++i)
     {
       if (s[i] == '_' and s[i - 1] != '^')
