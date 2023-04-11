@@ -42,11 +42,10 @@ int minimize(int &count, pair<int, int> pos)
   return count;
 }
 
-int get_max_count(int count)
+void get_max_count(int &count)
 {
-  count = minimize(count, {0, 0});
+  minimize(count, {0, 0});
   count = maximize(count, {0, 0});
-  return count;
 }
 
 int main()
@@ -68,8 +67,8 @@ int main()
       }
 
     int count{0};
-
-    cout << get_max_count(count) << "\n";
+    get_max_count(count);
+    cout << count << "\n";
   }
 
   return 0;
