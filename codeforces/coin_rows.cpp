@@ -45,7 +45,7 @@ int minimize(int &count, pair<int, int> pos)
 void get_max_count(int &count)
 {
   minimize(count, {0, 0});
-  count = maximize(count, {0, 0});
+  count += maximize(count, {0, 0});
 }
 
 int main()
