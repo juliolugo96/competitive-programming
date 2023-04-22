@@ -4,15 +4,33 @@ using namespace std;
 
 int main()
 {
-  int n;
+  size_t n;
 
   string s1, s2;
-
+  cin >> n;
   cin >> s1 >> s2;
 
-  auto s2_0 = count(s2.begin(), s2.end(), '0'), s2_1 = count(s2.begin(), s2.end(), '1');
+  int count{0};
+  for (int i{0}; i < n; ++i)
+  {
+    if (s1[i] != s2[i])
+    {
+     // cout << "Pos " << i << ": " << "Distinct " << s1[i] << " of " << s2[i] << "\n";
+      if (i != n - 1 and s1[i + 1] != s2[i + 1] and s1[i] != s1[i + 1])
+      {
+         // cout << "[" << i << "]: " << s1[i] << "\t" << s2[i] << "\n";
 
-  cout << 0 << "\n";
+        count++;
+        // cout << "Count: " << count << "\n\n";
+        i++;
+        continue;
+      }
+
+      count++;
+    }
+  }
+
+  cout << count << "\n";
 
   return 0;
 }
