@@ -2,8 +2,6 @@
 
 using namespace std;
 
-static int matrix[100][100];
-
 int main()
 {
   int t;
@@ -15,10 +13,19 @@ int main()
     int n, k;
 
     cin >> n >> k;
+    string opinions[n];
 
     for (int i{0}; i < n; i++)
-      for (int j{0}; j < k; j++)
-        cin >> matrix[i][j];
+      cin >> opinions[i];
+
+    int res{0};
+    for (int i{0}; i < n; i++)
+      if (opinions[0] == opinions[i])
+        res++;
+
+    cout << res << "\n";
+
+    //    cout << "\n\n";
   }
 
   return 0;
