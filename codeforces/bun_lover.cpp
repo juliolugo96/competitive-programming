@@ -1,4 +1,4 @@
-# include <bits/stdc++.h>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -8,15 +8,13 @@ int main()
 
   cin >> t;
 
-  while(t--)
+  while (t--)
   {
-    int n;
+    long long n;
     cin >> n;
-    int res {26};
-    for (int i{0}; i < n; i++)
-      res += 26+i;
-  }
 
+    cout << ((n + 1) * n) + n + 2 << "\n";
+  }
 
   return 0;
 }
