@@ -2,51 +2,7 @@
 
 using namespace std;
 
-int matrix[2][100001], mem[2][100001];
-
-int m;
-
-int maximize(int &count, pair<int, int> pos)
-{
-  if (pos.first == m - 1 and pos.second == 1)
-    return count;
-
-  if (pos.first >= m or pos.second >= 2)
-    return 0;
-
-  if (mem[pos.first][pos.second] == 1)
-    return 0;
-
-  mem[pos.first][pos.second] = 1;
-  auto current_count = count;
-  count += max(maximize(current_count, {pos.first + 1, pos.second}), maximize(current_count, {pos.first, pos.second + 1}));
-
-  return count;
-}
-
-int minimize(int &count, pair<int, int> pos)
-{
-  if (pos.first == m - 1 and pos.second == 1)
-    return count;
-
-  if (pos.first >= m or pos.second >= 2)
-    return 0;
-
-  if (mem[pos.first][pos.second] == 1)
-    return 0;
-
-  mem[pos.first][pos.second] = 1;
-  auto current_count = count;
-  count += min(minimize(current_count, {pos.first + 1, pos.second}), minimize(current_count, {pos.first, pos.second + 1}));
-
-  return count;
-}
-
-void get_max_count(int &count)
-{
-  minimize(count, {0, 0});
-  count += maximize(count, {0, 0});
-}
+static int matrix[2][static_cast<int>(1e5)], mem[2][static_cast<int>(1e5)];
 
 int main()
 {
@@ -57,18 +13,26 @@ int main()
   while (t--)
   {
 
+    int m;
     cin >> m;
 
     for (int i{0}; i < 2; ++i)
       for (int j{0}; j < m; ++j)
-      {
         cin >> matrix[i][j];
-        mem[i][j] = 0;
-      }
 
-    // int count{0};
-    // get_max_count(count);
-    // cout << count << "\n";
+    int suffix_sum{0}, prefix_sum{0}, ans{static_cast<int>(2e9 + 1)};
+
+    for (int i{0}; i < m; i++)
+      suffix_sum += matrix[0][i];
+
+    for (int i{0}; i < m; ++i)
+    {
+      suffix_sum -= matrix[0][i];
+      ans = min(ans, max(suffix_sum, prefix_sum));
+      prefix_sum += matrix[1][i];
+    }
+
+    cout << ans << "\n";
   }
 
   return 0;
