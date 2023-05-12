@@ -66,9 +66,9 @@ int main()
         mem[i][j] = 0;
       }
 
-    int count{0};
-    get_max_count(count);
-    cout << count << "\n";
+    // int count{0};
+    // get_max_count(count);
+    // cout << count << "\n";
   }
 
   return 0;
